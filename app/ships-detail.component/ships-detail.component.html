@@ -1,4 +1,3 @@
-
     <div class="ship-col-container col-lg-4 col-md-4">
         <div class="ship-spec">
             <div class="price">
@@ -19,9 +18,8 @@
                         <h3 class="cruise-title"></h3>
 
                         <div class="radio" *ngFor="let sailingOption of sailing.sailing_options">
-                            
-                            <label><input type="radio"> {{sailingOption.sailing_date}}</label>
-                            <div class="sailing-date-price">{{sailingOption.sailing_price}}</div>
+                            <label><input type="radio" (click)="updateSelected(sailingOption)"> {{sailingOption.sailing_date}}</label>
+                            <div class="sailing-date-price">{{sailingOption.sailing_price | currency:'USD' : true}}</div>
                         </div>
                     </div>
                 </div>

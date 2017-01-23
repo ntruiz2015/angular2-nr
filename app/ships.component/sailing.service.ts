@@ -13,10 +13,10 @@ export class SailingService {
 
     constructor(private http: Http) { };
 
-    private extractData(res: Response) {
-        let body = res.json();
-        return body.data || {};
-    }
+    // private extractData(res: Response) {
+    //     let body = res.json();
+    //     return body.data || {};
+    // }
 
     private handleError(error: Response | any) {
         let errMsg: string;
@@ -37,10 +37,7 @@ export class SailingService {
             .map((res: any) => res.json())
             .catch(this.handleError);
     }
-
-    matchSailings(): void {
-
-    }
+  
 
     
 }
