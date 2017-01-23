@@ -9,7 +9,7 @@ import { Ship } from '../ship';
 @Injectable()
 export class SailingService {
     private shipsUrl = './app/data/ships.json';
-    
+
 
     constructor(private http: Http) { };
 
@@ -37,5 +37,11 @@ export class SailingService {
             .map((res: any) => res.json())
             .catch(this.handleError);
     }
+
+    matchSailings(): void {
+
+    }
+
+    
 }
 

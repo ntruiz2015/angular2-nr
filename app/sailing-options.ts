@@ -1,4 +1,4 @@
 export class SailingOption {
-    price: number;
-    date: string;
+    sailing_price: number;
+    sailing_date: string;
 }

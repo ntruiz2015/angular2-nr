@@ -1,9 +1,9 @@
 import { SailingOption } from './sailing-options';
 
 export class Sailing {
-    id: number;
-    name: string;
-    cruiseLineId: number;
-    image: string;
-    sailingOptions: SailingOption[];
+    sailing_id: number;
+    sailing_name: string;
+    sailing_cruise_line_id: number;
+    sailing_main_image: string;
+    sailing_options: SailingOption[];
 }

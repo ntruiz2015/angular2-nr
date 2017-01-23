@@ -1,5 +1,5 @@
 export class CruiseLine {
-    id: number;
-    name: string;
-    shipname: string;
+    cruise_line_id: number;
+    cruise_line_name: string;
+    cruise_ship_name: string;
 }

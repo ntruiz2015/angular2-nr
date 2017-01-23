@@ -4,6 +4,7 @@ import { SailingService } from './sailing.service';
 import { Sailing } from '../sailings';
 import { CruiseLine } from '../cruise-line';
 import { Ship } from '../ship';
+// import { Serialize } from '../data/serialize'
 
 @Component({
     moduleId: module.id,
@@ -25,8 +26,19 @@ export class ShipsComponent implements OnInit {
     getSailingsCruiseLines() {
         this.sailingService.getSailingsCruiseLines()
             .subscribe(
-            result => { this.ships = result; },
+            result => {
+                this.ships = result;
+                this.sailings = result.sailings;
+                this.cruiseLines = result.cruise_lines;
+            },
             error => this.errorMessage = error);
     }
+
+    // serialize() {
+    //     for (let i = 0; i < this.sailings.length; i++) {
+    //         this.sailingService.fillFromJson(this.sailings[i]);
+    //     }
+    // }
+
 
 }
