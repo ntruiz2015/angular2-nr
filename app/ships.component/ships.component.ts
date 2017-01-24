@@ -46,13 +46,9 @@ export class ShipsComponent implements OnInit {
       return matched;
     }
 
-    updatedSelectedTotal() {
-
+    updatedSelectedTotal(selectedOptionPrice: number) {
+      this.selectedTotal = selectedOptionPrice;
     }
-
-
-
-
 
     // serialize() {
       //     for (let i = 0; i < this.sailings.length; i++) {

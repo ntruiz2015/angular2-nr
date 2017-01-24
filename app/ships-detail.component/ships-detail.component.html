@@ -18,7 +18,9 @@
                         <h3 class="cruise-title"></h3>
 
                         <div class="radio" *ngFor="let sailingOption of sailing.sailing_options">
-                            <label><input type="radio" (click)="updateSelected(sailingOption)"> {{sailingOption.sailing_date}}</label>
+                            <label><input type="radio"
+                                          name="option{{sailing.sailing_name}}"
+                                          (click)="updateSelected(sailingOption)"> {{sailingOption.sailing_date}}</label>
                             <div class="sailing-date-price">{{sailingOption.sailing_price | currency:'USD' : true}}</div>
                         </div>
                     </div>

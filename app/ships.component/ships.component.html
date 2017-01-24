@@ -40,7 +40,7 @@
       </div>
     </div>-->
     <div class="row" id="ships-row">
-    <ship-detail *ngFor="let sailing of sailings" [sailing]="sailing"></ship-detail>
+    <ship-detail *ngFor="let sailing of sailings" [sailing]="sailing" (updateSelected)="updatedSelectedTotal($event)"></ship-detail>
     </div>
   </div>
 </div>
