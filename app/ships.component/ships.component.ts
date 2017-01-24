@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 
 import { SailingService } from './sailing.service';
 import { Sailing } from '../sailings';
@@ -6,7 +6,6 @@ import { CruiseLine } from '../cruise-line';
 import { Ship } from '../ship';
 import { ShipsDetailComponent } from '../ships-detail.component/ships-detail.component';
 
-// import { Serialize } from '../data/serialize'
 
 @Component({
     moduleId: module.id,
@@ -18,7 +17,10 @@ export class ShipsComponent implements OnInit {
     sailings: Sailing[] = [];
     cruiseLines: CruiseLine[] = [];
     errorMessage: string;
-    selectedTotal: number;
+    selectedTotal: number = 0;
+
+    @ViewChild(ShipsDetailComponent)
+    private shipsDetailComponent: ShipsDetailComponent[];
 
     constructor(private sailingService: SailingService) { };
 
@@ -47,15 +49,12 @@ export class ShipsComponent implements OnInit {
     }
 
     updatedSelectedTotal(selectedOptionPrice: number) {
-      this.selectedTotal = selectedOptionPrice;
+        let totalSelected = 0;
+        for(let i=0; i<this.shipsDetailComponent.length;i++) {
+          totalSelected += this.shipsDetailComponent[i].selectedOptionPrice;
+        }
+        this.selectedTotal = totalSelected;
     }
-
-    // serialize() {
-      //     for (let i = 0; i < this.sailings.length; i++) {
-      //         this.sailingService.fillFromJson(this.sailings[i]);
-      //     }
-      // }
-
 
 
 }

@@ -3,44 +3,9 @@
 
     <h1 class="col-lg-4 col-md-4 col-sm-5 col-xs-12">Choose Your Sailings </h1>
     <h4 class="col-lg-3 col-md-3 col-sm-3 col-xs-12">(Pick one for each box)</h4>
-    <!--<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" *ngFor="let sailing of sailings">
-      <div class="row" id="ships-row">
-        <div class="ship-col-container col-lg-4 col-md-4">
-          <div class="ship-spec">
-            <div class="price">
-              <p class="price-desc">Starting at {{getLowestSailingPrice(sailing)}}</p>
-
-              <p class="price-amt"></p>
-            </div>
-            <div class="row">
-              <div class="col-md-12 col-sm-5 col-xs-12">
-                <div class="ship-spec-image"></div>
-              </div>
-              <div class="col-md-12 col-sm-7 col-xs-12">
-                <div class="ship-spec-descrip">
-                  <div class="line-cruise-name">
-                    <span></span>
-                    <span></span>
-                  </div>
-
-                  <h3 class="cruise-title"></h3>
-
-                  <div class="radio">
-                    <label>
-                      <input type="radio">
-                     </label>
-
-                    <div class="sailing-date-price"></div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>-->
     <div class="row" id="ships-row">
-    <ship-detail *ngFor="let sailing of sailings" [sailing]="sailing" (updateSelected)="updatedSelectedTotal($event)"></ship-detail>
+    <ship-detail *ngFor="let sailing of sailings" [sailing]="sailing"
+                 (selectedOptionEmitter)="updatedSelectedTotal($event)"></ship-detail>
     </div>
   </div>
 </div>
@@ -50,10 +15,10 @@
       <div class="total-spec">
         <div class="row">
           <div class="col-lg-10 col-md-10 col-sm-8 col-xs-6">
-            <h2>Your Selected Sailings Total {{selectedTotal}}</h2>
+            <h2>Your Selected Sailings Total</h2>
           </div>
           <div class="col-lg-2 col-md-2 col-sm-4 col-xs-6">
-            <div class="price"></div>
+            <div class="price">{{selectedTotal}}</div>
           </div>
         </div>
       </div>

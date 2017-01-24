@@ -13,7 +13,8 @@ export class ShipsDetailComponent {
     @Input() sailing: Sailing;
     @Output() selectedOptionEmitter = new EventEmitter<number>();
 
-    selectedOptionPrice: number;
+    selectedOptionPrice: number = 0;
+    selectedOption: SailingOption;
 
     getLowestSailingPrice(sailing: Sailing): number {
         let lowest = sailing.sailing_options[0].sailing_price;
@@ -27,9 +28,8 @@ export class ShipsDetailComponent {
 
     updateSelected(sailingOption: SailingOption) {
        this.selectedOptionPrice = sailingOption.sailing_price;
-       this.selectedOptionEmitter.emit( this.selectedOptionPrice);
+       this.selectedOption = sailingOption;
+       this.selectedOptionEmitter.emit(this.selectedOptionPrice);
     }
-
-
 
 }
