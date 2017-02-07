@@ -22,7 +22,6 @@ export class ShipsComponent implements OnInit  {
     cruiseLines: CruiseLine[] = [];
     errorMessage: string;
     selectedTotal: number = 0;
-    order: Order;
 
     @ViewChildren(ShipsDetailComponent) shipsDetailComponent: QueryList<ShipsDetailComponent>;
     @Output() order: Order;
@@ -65,8 +64,7 @@ export class ShipsComponent implements OnInit  {
         this.selectedTotal = totalSelected;
     }
 
-    createOrder(): Order {
-
+    createOrder(): void {
       let components: OrderComponent[] = []
       this.shipsDetailComponent.forEach(comp => {
         if(comp.selectedOption) {
@@ -76,6 +74,5 @@ export class ShipsComponent implements OnInit  {
         }
       });
       this.order = this.orderService.createOrder(this.selectedTotal, components);
-
     }
 }

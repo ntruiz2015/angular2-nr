@@ -14,7 +14,6 @@ export class OrderDetailComponent implements OnInit {
 
   constructor(private orderService: OrderService){}
 
-
   ngOnInit(): void {
 
   }
