@@ -2,6 +2,8 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
 
 import { Sailing } from '../sailings';
 import { SailingOption } from '../sailing-options';
+import { CruiseLine } from '../cruise-line';
+
 
 @Component({
     moduleId: module.id,
@@ -10,8 +12,8 @@ import { SailingOption } from '../sailing-options';
 })
 export class ShipsDetailComponent {
 
-    @Input() sailing: Sailing;
-    @Output() selectedOptionEmitter = new EventEmitter<number>();
+    @Input() cruiseLine: CruiseLine;
+    @Output() selectedOptionEmitter: EventEmitter<SailingOption> = new EventEmitter();
 
     selectedOptionPrice: number = 0;
     selectedOption: SailingOption;
@@ -26,10 +28,11 @@ export class ShipsDetailComponent {
         return lowest;
     }
 
-    updateSelected(sailingOption: SailingOption) {
+    updateSelected(sailingOption: SailingOption): void {
        this.selectedOptionPrice = sailingOption.sailing_price;
        this.selectedOption = sailingOption;
-       this.selectedOptionEmitter.emit(this.selectedOptionPrice);
+       this.selectedOptionEmitter.emit(this.selectedOption);
     }
+
 
 }

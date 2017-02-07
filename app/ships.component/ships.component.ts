@@ -1,28 +1,37 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChildren, QueryList, Output } from '@angular/core';
+import { Router } from '@angular/router';
 
 import { SailingService } from './sailing.service';
+import { OrderService } from '../app.services/order.service';
+
 import { Sailing } from '../sailings';
 import { CruiseLine } from '../cruise-line';
 import { Ship } from '../ship';
 import { ShipsDetailComponent } from '../ships-detail.component/ships-detail.component';
-
+import { Order } from '../order';
+import { OrderComponent } from '../order-comp';
 
 @Component({
     moduleId: module.id,
     selector: 'ships-component',
     templateUrl: 'ships.component.html'
 })
-export class ShipsComponent implements OnInit {
+export class ShipsComponent implements OnInit  {
     ships: Ship[] = [];
     sailings: Sailing[] = [];
     cruiseLines: CruiseLine[] = [];
     errorMessage: string;
     selectedTotal: number = 0;
+    order: Order;
 
-    @ViewChild(ShipsDetailComponent)
-    private shipsDetailComponent: ShipsDetailComponent[];
+    @ViewChildren(ShipsDetailComponent) shipsDetailComponent: QueryList<ShipsDetailComponent>;
+    @Output() order: Order;
 
-    constructor(private sailingService: SailingService) { };
+    constructor(
+      private sailingService: SailingService,
+      private router: Router,
+      private orderService: OrderService
+    ) { };
 
     ngOnInit(): void {
         this.getSailingsCruiseLines();
@@ -36,7 +45,7 @@ export class ShipsComponent implements OnInit {
                 this.sailings = result.sailings;
                 this.cruiseLines = result.cruise_lines;
                 this.cruiseLines =  this.cruiseLines.map((cruiseLine) => {
-                  cruiseLine.sailings = this.matchSailing(cruiseLine.cruise_line_id);
+                  cruiseLine.sailing = this.matchSailing(cruiseLine.cruise_line_id);
                   return cruiseLine;
                   });
             },
@@ -48,13 +57,25 @@ export class ShipsComponent implements OnInit {
       return matched;
     }
 
-    updatedSelectedTotal(selectedOptionPrice: number) {
+    updatedSelectedTotal() {
         let totalSelected = 0;
-        for(let i=0; i<this.shipsDetailComponent.length;i++) {
-          totalSelected += this.shipsDetailComponent[i].selectedOptionPrice;
-        }
+        this.shipsDetailComponent.forEach((component) => {
+          totalSelected+=component.selectedOptionPrice;
+        })
         this.selectedTotal = totalSelected;
     }
 
+    createOrder(): Order {
 
+      let components: OrderComponent[] = []
+      this.shipsDetailComponent.forEach(comp => {
+        if(comp.selectedOption) {
+          let component = this.orderService.createComponent(comp.cruiseLine.cruise_ship_name,
+            comp.cruiseLine.sailing.sailing_name, comp.selectedOption);
+          components.push(component);
+        }
+      });
+      this.order = this.orderService.createOrder(this.selectedTotal, components);
+
+    }
 }

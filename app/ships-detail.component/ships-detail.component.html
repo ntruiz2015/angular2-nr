@@ -1,27 +1,28 @@
     <div class="ship-col-container col-lg-4 col-md-4">
         <div class="ship-spec">
             <div class="price">
-                <p class="price-desc">Starting at {{getLowestSailingPrice(sailing)}}</p>
+                <p class="price-desc">Starting at </p>
 
-                <p class="price-amt"></p>
+                <p class="price-amt">{{getLowestSailingPrice(cruiseLine.sailing) | currency:'USD' : true : '1.0-0'}}</p>
             </div>
             <div class="row">
                 <div class="col-md-12 col-sm-5 col-xs-12">
-                    <div class="ship-spec-image"></div>
+                    <div class="ship-spec-image">
+                      <img src="{{cruiseLine.sailing.sailing_main_image}}" />
+                    </div>
                 </div>
                 <div class="col-md-12 col-sm-7 col-xs-12">
                     <div class="ship-spec-descrip">
                         <div class="line-cruise-name">
-                            <span></span>
-                            <span></span>
+                            <span>{{cruiseLine.cruise_line_name}}</span> - <span>{{cruiseLine.cruise_ship_name}}</span>
                         </div>
-                        <h3 class="cruise-title"></h3>
+                        <h3 class="cruise-title">{{cruiseLine.sailing.sailing_name}}</h3>
 
-                        <div class="radio" *ngFor="let sailingOption of sailing.sailing_options">
+                        <div class="radio" *ngFor="let sailingOption of cruiseLine.sailing.sailing_options">
                             <label><input type="radio"
-                                          name="option{{sailing.sailing_name}}"
+                                          name="option{{cruiseLine.sailing.sailing_name}}"
                                           (click)="updateSelected(sailingOption)"> {{sailingOption.sailing_date}}</label>
-                            <div class="sailing-date-price">{{sailingOption.sailing_price | currency:'USD' : true}}</div>
+                            <div class="sailing-date-price">{{sailingOption.sailing_price | currency:'USD' : true : '1.0-0'}}</div>
                         </div>
                     </div>
                 </div>

@@ -4,7 +4,6 @@ import { Observable } from 'rxjs/Rx';
 
 import 'rxjs/Operator';
 
-import { Ship } from '../ship';
 
 @Injectable()
 export class SailingService {
@@ -37,8 +36,6 @@ export class SailingService {
             .map((res: any) => res.json())
             .catch(this.handleError);
     }
-  
 
-    
 }
 

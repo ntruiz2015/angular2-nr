@@ -4,5 +4,5 @@ export class CruiseLine {
     cruise_line_id: number;
     cruise_line_name: string;
     cruise_ship_name: string;
-    sailings: Sailing;
+    sailing: Sailing;
 }
